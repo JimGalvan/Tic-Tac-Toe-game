@@ -44,11 +44,13 @@ public class Controller {
     @FXML
     void setValue(ActionEvent event) {
         if (event.getSource() == button1){
-            button1.setText(game.getCurrentPlayer());
-            game.switchPlayers();
+                button1.setText(game.getCurrentPlayer());
+                game.switchPlayers();
         } else if (event.getSource() == button2){
+
             button2.setText(game.getCurrentPlayer());
             game.switchPlayers();
+
         } else if (event.getSource() == button3){
             button3.setText(game.getCurrentPlayer());
             game.switchPlayers();

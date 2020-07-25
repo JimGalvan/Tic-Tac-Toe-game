@@ -13,9 +13,12 @@ public class TicTacToe {
     }
 
     public void switchPlayers(){
-       if (currentPlayer == "X") this.setCurrentPlayer("O");
-       else if (currentPlayer == "O") this.setCurrentPlayer("X");
+
+            if (currentPlayer == "X") this.setCurrentPlayer("O");
+            else if (currentPlayer == "O") this.setCurrentPlayer("X");
 
     }
+
+
 
 }
