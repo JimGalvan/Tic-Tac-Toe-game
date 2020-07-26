@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -39,40 +40,49 @@ public class Controller {
     public void initialize() {
 
         game = new TicTacToe();
+
     }
 
     @FXML
     void setValue(ActionEvent event) {
-        if (event.getSource() == button1){
-                button1.setText(game.getCurrentPlayer());
+
+        setBox(event, button1, 1);
+        setBox(event, button2, 2);
+        setBox(event, button3, 3);
+        setBox(event, button4, 4);
+        setBox(event, button5, 5);
+        setBox(event, button6, 6);
+        setBox(event, button7, 7);
+        setBox(event, button8, 8);
+        setBox(event, button9, 9);
+    }
+
+    // Helper method to avoid duplicated code and set values to Box
+    void setBox(Event event, Button button, int buttonID) {
+        if (event.getSource() == button) {
+            if (game.setBoxValue(buttonID)) {
+
+                button.setText(game.getCurrentPlayer());
+                game.checkGame();
                 game.switchPlayers();
-        } else if (event.getSource() == button2){
+            }
 
-            button2.setText(game.getCurrentPlayer());
-            game.switchPlayers();
-
-        } else if (event.getSource() == button3){
-            button3.setText(game.getCurrentPlayer());
-            game.switchPlayers();
-        } else if (event.getSource() == button4){
-            button4.setText(game.getCurrentPlayer());
-            game.switchPlayers();
-        } else if (event.getSource() == button5){
-            button5.setText(game.getCurrentPlayer());
-            game.switchPlayers();
-        } else if (event.getSource() == button6){
-            button6.setText(game.getCurrentPlayer());
-            game.switchPlayers();
-        } else if (event.getSource() == button7){
-            button7.setText(game.getCurrentPlayer());
-            game.switchPlayers();
-        } else if (event.getSource() == button8){
-            button8.setText(game.getCurrentPlayer());
-            game.switchPlayers();
-        } else if (event.getSource() == button9){
-            button9.setText(game.getCurrentPlayer());
-            game.switchPlayers();
+            if (game.getGameState()){
+                resetButtonValues();
+            }
         }
     }
 
+    public void resetButtonValues(){
+        button1.setText(null);
+        button2.setText(null);
+        button3.setText(null);
+        button4.setText(null);
+        button5.setText(null);
+        button6.setText(null);
+        button7.setText(null);
+        button8.setText(null);
+        button9.setText(null);
+    }
 }
+
