@@ -74,11 +74,11 @@ public class TicTacToe {
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.get() == buttonO) {
-            currentPlayer = "O";
+            setCurrentPlayer("O");
             controller.updatePlayerLabel();
 
         } else if (result.get() == buttonX) {
-            currentPlayer = "X";
+            setCurrentPlayer("X");
             controller.updatePlayerLabel();
         }
     }
