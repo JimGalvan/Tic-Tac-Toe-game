@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class TicTacToe {
 
-    HashMap<Integer, Box> list
+    private HashMap<Integer, Box> list
             = new HashMap<>() {{
         put(1, new Box());
         put(2, new Box());
@@ -24,14 +24,8 @@ public class TicTacToe {
 
     private String currentPlayer = "X";
     private boolean gameFinished = false;
-
-    public void setGameFinished(boolean value){
-        this.gameFinished = value;
-    }
-
-    public boolean getGameState(){
-        return gameFinished;
-    }
+    private boolean isGridFull = false;
+    private  Controller controller = new Controller();
 
     public boolean setBoxValue(int id) {
         // Check if current value in box is empty and set
@@ -43,17 +37,50 @@ public class TicTacToe {
         return false;
     }
 
-    public String getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    public void setCurrentPlayer(String currentPlayer) {
-        this.currentPlayer = currentPlayer;
-    }
-
     public void switchPlayers() {
         if (currentPlayer == "X") this.setCurrentPlayer("O");
         else if (currentPlayer == "O") this.setCurrentPlayer("X");
+    }
+
+    void checkBoxes(int first, int second, int three) {
+        // Check combinations
+        if (list.get(first).getValue() == currentPlayer & list.get(second).getValue() == currentPlayer &
+                list.get(three).getValue() == currentPlayer) {
+
+            setGameFinished(true);
+            showOptions();
+            resetBoxes();
+        }
+    }
+
+    public void resetBoxes() {
+        for (int i = 0; i <= list.size() ; i++) {
+            if (list.get(i) != null) {
+                list.get(i).setValue(null);
+            }
+        }
+    }
+
+    void showOptions() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText("Winner is " + currentPlayer);
+        alert.setContentText("Select player to start: ");
+
+        ButtonType buttonX = new ButtonType("X");
+        ButtonType buttonO = new ButtonType("O");
+
+        alert.getButtonTypes().setAll(buttonX, buttonO);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == buttonO) {
+            currentPlayer = "O";
+            controller.updatePlayerLabel();
+
+        } else if (result.get() == buttonX) {
+            currentPlayer = "X";
+            controller.updatePlayerLabel();
+        }
     }
 
     // check game combinations
@@ -73,45 +100,19 @@ public class TicTacToe {
         checkBoxes(7, 5, 3);
     }
 
-    void checkBoxes(int first, int second, int three){
-        // Check combinations
-        if (list.get(first).getValue() == currentPlayer & list.get(second).getValue() == currentPlayer &
-                list.get(three).getValue() == currentPlayer) {
-
-            showOptions();
-            resetBoxes();
-            setGameFinished(true);
-        }
+    public void setGameFinished(boolean value) {
+        this.gameFinished = value;
     }
 
-    private void resetBoxes() {
-        for (int i = 0; i < list.size() - 1; i++){
-            if (list.get(i) != null){
-                list.get(i).setValue(null);
-            }
-        }
+    public boolean getGameState() {
+        return gameFinished;
     }
 
-    void showOptions(){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText("Winner is " + currentPlayer);
-        alert.setContentText("Select player to start: ");
+    public String getCurrentPlayer() {
+        return currentPlayer;
+    }
 
-        ButtonType buttonX = new ButtonType("X");
-        ButtonType buttonO = new ButtonType("O");
-
-        alert.getButtonTypes().setAll(buttonX, buttonO);
-        Optional<ButtonType> result = alert.showAndWait();
-
-
-
-        if (result.get() == buttonO){
-            currentPlayer = "O";
-        } else if (result.get() == buttonX){
-            currentPlayer = "X";
-        }
-
-        System.out.println(currentPlayer);
+    public void setCurrentPlayer(String currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 }

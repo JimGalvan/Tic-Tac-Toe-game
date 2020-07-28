@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 public class Controller {
 
@@ -37,14 +38,21 @@ public class Controller {
     private Button button9;
 
     @FXML
+    private Button resetButton;
+
+    @FXML
+    private Label playerLabel;
+
+    @FXML
     public void initialize() {
-
         game = new TicTacToe();
-
     }
 
     @FXML
     void setValue(ActionEvent event) {
+
+        updatePlayerLabel();
+        if (event.getSource() == resetButton) resetButtonValues();
 
         setBox(event, button1, 1);
         setBox(event, button2, 2);
@@ -60,15 +68,19 @@ public class Controller {
     // Helper method to avoid duplicated code and set values to Box
     void setBox(Event event, Button button, int buttonID) {
         if (event.getSource() == button) {
-            if (game.setBoxValue(buttonID)) {
 
+            if (game.setBoxValue(buttonID)) {
+                System.out.println(game.getCurrentPlayer());
                 button.setText(game.getCurrentPlayer());
                 game.checkGame();
                 game.switchPlayers();
             }
-
+            // check if games is finished, if so, reset Box values,
+            // and button values
             if (game.getGameState()){
                 resetButtonValues();
+                updatePlayerLabel();
+                game.setGameFinished(false);
             }
         }
     }
@@ -83,6 +95,12 @@ public class Controller {
         button7.setText(null);
         button8.setText(null);
         button9.setText(null);
+
+        game.resetBoxes();
+    }
+
+    void updatePlayerLabel(){
+        playerLabel.setText(" " + game.getCurrentPlayer());
     }
 }
 
