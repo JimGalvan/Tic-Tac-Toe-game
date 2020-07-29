@@ -41,6 +41,10 @@ public class Controller {
     private Button resetButton;
 
     @FXML
+    private Button switchButton;
+
+
+    @FXML
     private Label playerLabel;
 
     @FXML
@@ -51,8 +55,8 @@ public class Controller {
     @FXML
     void setValue(ActionEvent event) {
 
-        updatePlayerLabel();
         if (event.getSource() == resetButton) resetButtonValues();
+        if (event.getSource() == switchButton) game.switchPlayers();
 
         setBox(event, button1, 1);
         setBox(event, button2, 2);
@@ -67,17 +71,19 @@ public class Controller {
 
     // Helper method to avoid duplicated code and set values to Box
     void setBox(Event event, Button button, int buttonID) {
+        updatePlayerLabel();
         if (event.getSource() == button) {
 
-            if (game.setBoxValue(buttonID)) {
-                System.out.println(game.getCurrentPlayer());
+            if (game.checkIfBoxHasValue(buttonID)) {
+                game.setBoxValue(buttonID);
                 button.setText(game.getCurrentPlayer());
                 game.checkGame();
                 game.switchPlayers();
             }
             // check if games is finished, if so, reset Box values,
             // and button values
-            if (game.getGameState()){
+            if (game.isGameFinished()){
+                game.resetBoxes();
                 resetButtonValues();
                 updatePlayerLabel();
                 game.setGameFinished(false);
@@ -99,7 +105,7 @@ public class Controller {
         game.resetBoxes();
     }
 
-    void updatePlayerLabel(){
+    public void updatePlayerLabel(){
         playerLabel.setText(" " + game.getCurrentPlayer());
     }
 }

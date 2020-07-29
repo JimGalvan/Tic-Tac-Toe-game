@@ -79,12 +79,12 @@
       </GridPane>
       <Pane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="resetButton" layoutX="198.0" layoutY="36.0" mnemonicParsing="false" onAction="#setValue" prefHeight="31.0" prefWidth="124.0" text="Reset game">
+            <Button fx:id="resetButton" layoutX="197.0" layoutY="13.0" mnemonicParsing="false" onAction="#setValue" prefHeight="31.0" prefWidth="124.0" text="Reset game">
                <font>
-                  <Font size="17.0" />
+                  <Font size="16.0" />
                </font>
             </Button>
-            <Label layoutX="9.0" layoutY="42.0" prefHeight="26.0" prefWidth="136.0" text="Playing currently:">
+            <Label layoutX="9.0" layoutY="42.0" prefHeight="26.0" prefWidth="136.0" text="Currently playing:">
                <font>
                   <Font size="17.0" />
                </font>
@@ -94,6 +94,11 @@
                   <Font size="32.0" />
                </font>
             </Label>
+            <Button fx:id="switchButton" layoutX="197.0" layoutY="60.0" mnemonicParsing="false" onAction="#setValue" prefHeight="31.0" prefWidth="124.0" text="Switch players">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
          </children></Pane>
    </children>
 </GridPane>
