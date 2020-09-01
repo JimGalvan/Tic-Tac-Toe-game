@@ -43,7 +43,6 @@ public class Controller {
     @FXML
     private Button switchButton;
 
-
     @FXML
     private Label playerLabel;
 
@@ -54,7 +53,6 @@ public class Controller {
 
     @FXML
     void setValue(ActionEvent event) {
-
         if (event.getSource() == resetButton) resetButtonValues();
         if (event.getSource() == switchButton) game.switchPlayers();
 
@@ -73,7 +71,6 @@ public class Controller {
     void setBox(Event event, Button button, int buttonID) {
         updatePlayerLabel();
         if (event.getSource() == button) {
-
             if (game.checkIfBoxHasValue(buttonID)) {
                 game.setBoxValue(buttonID);
                 button.setText(game.getCurrentPlayer());

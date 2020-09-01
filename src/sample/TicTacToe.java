@@ -2,26 +2,27 @@ package sample;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 
 import java.util.HashMap;
 import java.util.Optional;
 
 public class TicTacToe {
 
-    private HashMap<Integer, Box> list
-            = new HashMap<>() {{
-        put(1, new Box());
-        put(2, new Box());
-        put(3, new Box());
-        put(4, new Box());
-        put(4, new Box());
-        put(5, new Box());
-        put(6, new Box());
-        put(7, new Box());
-        put(8, new Box());
-        put(9, new Box());
-    }};
+    private final HashMap<Integer, Box> list
+            = new HashMap<>();
+
+    TicTacToe(){
+        list.put(1, new Box());
+        list.put(2, new Box());
+        list.put(3, new Box());
+        list.put(4, new Box());
+        list.put(4, new Box());
+        list.put(5, new Box());
+        list.put(6, new Box());
+        list.put(7, new Box());
+        list.put(8, new Box());
+        list.put(9, new Box());
+    }
 
     private String currentPlayer = "X";
     private boolean gameFinished = false;
@@ -40,7 +41,6 @@ public class TicTacToe {
     }
 
     public void switchPlayers() {
-
         if (!gameFinished) {
             if (currentPlayer == "X") this.setCurrentPlayer("O");
             else if (currentPlayer == "O") this.setCurrentPlayer("X");
@@ -68,7 +68,6 @@ public class TicTacToe {
         // Check combinations
         if (list.get(first).getValue() == currentPlayer & list.get(second).getValue() == currentPlayer &
                 list.get(three).getValue() == currentPlayer) {
-
             setGameFinished(true);
             showOptions();
             resetBoxes();
@@ -89,7 +88,6 @@ public class TicTacToe {
 
         if (result.get() == buttonO) {
             setCurrentPlayer("O");
-
         } else if (result.get() == buttonX) {
             setCurrentPlayer("X");
         }
